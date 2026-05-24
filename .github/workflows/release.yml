@@ -23,7 +23,15 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends dpkg rsync rpm
+          # Сборочные тулзы + Qt runtime — PySide6 при импорте дёргает
+          # libEGL/libGL даже в offscreen-режиме, иначе scripts/generate_icons.py
+          # падает с ImportError на CI-раннере.
+          sudo apt-get install -y --no-install-recommends \
+            dpkg rsync rpm \
+            libegl1 libgl1 libxkbcommon0 libxcb-cursor0 libdbus-1-3 \
+            libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 \
+            libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1 \
+            libfontconfig1
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
