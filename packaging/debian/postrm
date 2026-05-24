@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ -x /usr/bin/update-desktop-database ] && [ -d /usr/share/applications ]; then
+    /usr/bin/update-desktop-database -q /usr/share/applications || true
+fi
+if [ -x /usr/bin/gtk-update-icon-cache ] && \
+   [ -f /usr/share/icons/hicolor/index.theme ]; then
+    /usr/bin/gtk-update-icon-cache -q -t /usr/share/icons/hicolor || true
+fi
+
+exit 0

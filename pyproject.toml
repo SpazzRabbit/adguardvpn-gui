@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adguard-gui"
+version = "0.2.0"
+description = "Unofficial modern desktop GUI for adguardvpn-cli"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = ["vpn", "adguard", "gui", "qt", "pyside6", "linux"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet",
+    "Topic :: System :: Networking",
+]
+dependencies = [
+    "PySide6>=6.7,<7",
+]
+
+[project.scripts]
+adguard-gui = "adguard_gui.app:run"
+
+[project.urls]
+Homepage = "https://github.com/<your-user>/adguard-gui"
+Issues   = "https://github.com/<your-user>/adguard-gui/issues"
+Source   = "https://github.com/<your-user>/adguard-gui"
+
+[tool.setuptools.packages.find]
+include = ["adguard_gui*"]
+exclude = ["tests*", "build*", "packaging*", "scripts*", "assets*"]
+
+[tool.setuptools.package-data]
+adguard_gui = ["py.typed"]

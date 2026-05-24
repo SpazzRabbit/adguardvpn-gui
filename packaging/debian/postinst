@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+
+# Тихо и быстро обновляем кеши. Если каталоги пустые/отсутствуют — не
+# тратим время и не выводим ошибок (mass-deploy CI любит «idempotent»).
+if [ -x /usr/bin/update-desktop-database ] && [ -d /usr/share/applications ]; then
+    /usr/bin/update-desktop-database -q /usr/share/applications || true
+fi
+
+# gtk-update-icon-cache может сканировать всю hicolor-иерархию пару секунд —
+# делаем это только если иерархия реально присутствует и кеш-файл есть.
+if [ -x /usr/bin/gtk-update-icon-cache ] && \
+   [ -f /usr/share/icons/hicolor/index.theme ]; then
+    /usr/bin/gtk-update-icon-cache -q -t /usr/share/icons/hicolor || true
+fi
+
+# adguardvpn-cli не лежит в apt-репозиториях — предупреждаем пользователя,
+# но не падаем. Установка проходит за миллисекунды.
+if ! command -v adguardvpn-cli >/dev/null 2>&1; then
+    cat <<'EOF'
+
+  ──────────────────────────────────────────────────────────────────
+   adguardvpn-cli is not installed. AdGuard VPN GUI needs it to work.
+   Install it from the official source:
+
+       curl -fsSL https://raw.githubusercontent.com/AdguardTeam/AdGuardVPNCLI/master/scripts/release/install.sh \
+         | sh -s -- -v
+
+   Then run "adguardvpn-cli login" once, and you're set.
+  ──────────────────────────────────────────────────────────────────
+
+EOF
+fi
+
+exit 0

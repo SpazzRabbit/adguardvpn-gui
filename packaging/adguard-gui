@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+# Launcher для системной установки AdGuard VPN GUI.
+# Запускает adguard_gui.app.run() — точку входа приложения.
+import sys
+
+try:
+    from adguard_gui.app import run
+except ModuleNotFoundError:
+    # Если пакет лежит не в site-packages, а в /usr/share/adguard-gui — добавим путь.
+    import os
+    candidates = [
+        "/usr/share/adguard-gui",
+        "/usr/local/share/adguard-gui",
+    ]
+    for c in candidates:
+        if os.path.isdir(os.path.join(c, "adguard_gui")):
+            sys.path.insert(0, c)
+            break
+    from adguard_gui.app import run
+
+if __name__ == "__main__":
+    raise SystemExit(run())

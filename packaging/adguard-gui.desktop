@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=AdGuard VPN
+GenericName=VPN client
+Comment=AdGuard VPN desktop client
+Exec=adguard-gui %U
+TryExec=adguard-gui
+Icon=adguard-gui
+Terminal=false
+Categories=Network;Security;Qt;
+Keywords=VPN;AdGuard;Privacy;Tunnel;
+StartupWMClass=adguard-gui
+StartupNotify=true

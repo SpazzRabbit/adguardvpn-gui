@@ -1,0 +1,25 @@
+pkgname=adguard-gui
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="AdGuard VPN desktop client (GUI on top of adguardvpn-cli)"
+arch=('any')
+url="https://github.com/AdguardTeam"
+license=('MIT')
+depends=('python>=3.10' 'pyside6' 'adguardvpn-cli')
+source=()
+
+package() {
+    cd "$srcdir/.."
+    install -d "$pkgdir/usr/share/adguard-gui"
+    cp -r adguard_gui "$pkgdir/usr/share/adguard-gui/"
+
+    install -Dm755 packaging/adguard-gui "$pkgdir/usr/bin/adguard-gui"
+    install -Dm644 packaging/adguard-gui.desktop "$pkgdir/usr/share/applications/adguard-gui.desktop"
+
+    for size in 16 22 24 32 48 64 96 128 192 256 512; do
+        install -Dm644 "assets/icons/hicolor/${size}x${size}/apps/adguard-gui.png" \
+            "$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/adguard-gui.png"
+    done
+    install -Dm644 assets/icons/adguard-gui.svg \
+        "$pkgdir/usr/share/icons/hicolor/scalable/apps/adguard-gui.svg"
+}

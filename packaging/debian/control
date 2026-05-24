@@ -1,0 +1,19 @@
+Package: adguard-gui
+Version: 0.2.0
+Section: net
+Priority: optional
+Architecture: all
+Depends: python3 (>= 3.10),
+ python3-pyside6.qtwidgets,
+ python3-pyside6.qtsvg
+Recommends: python3-pyside6.qtcore,
+ python3-pyside6.qtgui
+Suggests: adguardvpn-cli
+Maintainer: AdGuard VPN GUI <noreply@example.com>
+Description: AdGuard VPN desktop client (GUI)
+ Modern Qt-based GUI on top of adguardvpn-cli with location list,
+ kill-switch, autostart and multi-language support.
+ .
+ The adguardvpn-cli binary itself is distributed by AdGuard
+ separately (https://adguard-vpn-cli.adtidy.org) and is not a Debian
+ package, so apt cannot install it as a dependency.

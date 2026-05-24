@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build artefacts
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+*.AppImage
+
+# Generated icon caches (regenerable from SVG)
+assets/icons/hicolor/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Local helpers
+_shot.py
+_screenshot.py
+/tmp_*
+
+# User config (must never be committed)
+config.json
+*.log

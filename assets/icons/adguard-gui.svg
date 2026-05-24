@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Зелёный градиентный фон-щит, форма заимствована из AdGuard -->
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7fc888"/>
+      <stop offset="100%" stop-color="#56a960"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#e8faec" stop-opacity="0.86"/>
+    </linearGradient>
+    <filter id="boltShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feOffset dx="0" dy="2" result="shadow"/>
+      <feComposite in="SourceGraphic" in2="shadow" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Слегка увеличенная тень под щитом -->
+  <path d="M128 18 L226 56 L226 134
+           Q226 196 128 240 Q30 196 30 134 L30 56 Z"
+        fill="#1a1d23" opacity="0.35" transform="translate(0,6)"/>
+
+  <!-- Сам щит -->
+  <path d="M128 18 L226 56 L226 134
+           Q226 196 128 240 Q30 196 30 134 L30 56 Z"
+        fill="url(#shieldGrad)" stroke="#3f7f48" stroke-width="3"/>
+
+  <!-- Внутренняя подсветка щита -->
+  <path d="M128 32 L212 64 L212 132
+           Q212 186 128 224 Q44 186 44 132 L44 64 Z"
+        fill="none" stroke="#9fdba6" stroke-width="2" opacity="0.55"/>
+
+  <!-- Молния — стилизованный VPN-импульс -->
+  <path d="M146 60
+           L92 142
+           L124 142
+           L110 198
+           L168 116
+           L134 116
+           L150 60 Z"
+        fill="url(#boltGrad)" stroke="#2f5a36" stroke-width="2.5"
+        stroke-linejoin="round"/>
+</svg>

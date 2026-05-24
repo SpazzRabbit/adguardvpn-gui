@@ -1,0 +1,63 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & publish artefacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends dpkg rsync rpm
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Resolve version
+        id: ver
+        run: |
+          ref="${GITHUB_REF##*/}"
+          ver="${ref#v}"
+          if [ -z "$ver" ] || [ "$ver" = "$ref" ]; then
+            ver=$(grep -oP '^version\s*=\s*"\K[^"]+' pyproject.toml | head -1)
+          fi
+          echo "version=$ver" >> "$GITHUB_OUTPUT"
+
+      - name: Build .deb
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: make deb VERSION=${{ steps.ver.outputs.version }}
+
+      - name: Build .rpm
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: make rpm VERSION=${{ steps.ver.outputs.version }} || true
+
+      - name: Collect artefacts
+        run: |
+          mkdir -p dist
+          cp build/*.deb dist/ || true
+          find build/rpm/RPMS -type f -name '*.rpm' -exec cp {} dist/ \; || true
+          ls -la dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*.deb
+            dist/*.rpm
