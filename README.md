@@ -7,9 +7,14 @@
 [![PySide6](https://img.shields.io/badge/PySide6-6.7+-41cd52.svg)](https://doc.qt.io/qtforpython-6/)
 [![Platform: Linux](https://img.shields.io/badge/platform-Linux-grey.svg)](#)
 
-A clean, dark-themed Qt frontend for [`adguardvpn-cli`](https://github.com/AdguardTeam/AdGuardVPNCLI),
-inspired by Proton VPN and Mullvad. Locations list with pings, kill switch, autostart, system tray,
-six UI languages — and proper Debian / RPM / Arch packaging.
+## Why?
+
+[`AdGuard VPN`](https://github.com/AdguardTeam/AdGuardVPNCLI) for Linux is CLI-first. This project adds a native desktop GUI:
+tray icon, one-click connect, locations with ping, autostart, exclusions,
+kill switch, and settings UI.
+
+⚠️ Unofficial community project. Not affiliated with AdGuard Software Ltd.
+Requires the official adguardvpn-cli to be installed and authenticated.
 
 <p align="center">
   <img src="assets/screenshots/home.png" alt="Home screen" width="820"/>
