@@ -12,10 +12,6 @@ inspired by Proton VPN and Mullvad. Locations list with pings, kill switch, auto
 six UI languages — and proper Debian / RPM / Arch packaging.
 
 <p align="center">
-  <img src="assets/icons/hicolor/256x256/apps/adguard-gui.png" alt="AdGuard VPN GUI icon" width="128"/>
-</p>
-
-<p align="center">
   <img src="assets/screenshots/home.png" alt="Home screen" width="820"/>
 </p>
 
